@@ -23,3 +23,13 @@ class BurgersApi:
         requests.delete(Url.BASE_URL + Endpoint.DELETE_USER_ENDPOINT, headers={
             'Authorization': token
         })
+
+    @staticmethod
+    @allure.step('Создаем новый заказ')
+    def create_order(token):
+        body = Helpers.mod_create_order_body()
+        create_order_response = requests.post(Url.BASE_URL + Endpoint.CREATE_ORDER_ENDPOINT, json=body, headers={
+            'Authorization': token
+        })
+        number = create_order_response.json()["order"]["number"]
+        return number

@@ -1,4 +1,5 @@
 import allure
+from selenium.common import NoSuchWindowException
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 
@@ -79,3 +80,7 @@ class BasePage:
         except NoSuchWindowException:
             WebDriverWait(self.driver, 10).until(lambda browser: len(browser.window_handles) > 1)
             self.driver.switch_to.window(self.driver.window_handles[-1])
+
+    @allure.step("Задаем ожидание для изменения текста элементе")
+    def get_expectation_for_element(self, locator, old_value, time=10):
+        return WebDriverWait(self.driver, time).until(lambda browser: self.find_element_with_wait(locator, time).text.strip() != old_value)

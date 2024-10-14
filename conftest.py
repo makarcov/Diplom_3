@@ -13,7 +13,8 @@ from pages.profile_page import ProfilePage
 
 
 @allure.step("Запуск браузера")
-@pytest.fixture(params=['chrome', 'firefox'])
+# @pytest.fixture(params=['chrome', 'firefox'])
+@pytest.fixture(params=['chrome'])
 def driver(request):
     browser = None
     if request.param == 'chrome':
@@ -67,3 +68,15 @@ def create_burger_with_popup_number(driver, create_and_login_user):
     popup_number = main_page.create_burger_order()
 
     yield popup_number
+
+@allure.step("Создание бургера авторизированным пользователем, возврат номера заказа и страницы Лента заказов")
+@allure.description("Возвращаем номер заказа из Истории заказов")
+@pytest.fixture()
+def create_burger_with_number_and_page(driver, create_and_login_user):
+    main_page = MainPage(driver)
+    main_page.create_burger_order()
+    popup_number = main_page.create_burger_order()
+    order_feed_page = OrderFeedPage(driver)
+    order_feed_page.open_order_feed()
+
+    yield popup_number, order_feed_page

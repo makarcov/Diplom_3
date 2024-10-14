@@ -1,5 +1,6 @@
 import allure
 
+from data import ExpextedText
 from locators.order_feed_locators import OrderFeedLocators
 from pages.base_page import BasePage
 
@@ -49,3 +50,11 @@ class OrderFeedPage(BasePage):
     def get_counter_order_in_process(self):
         number = self.find_element_with_wait(OrderFeedLocators.ORDERS_IN_PROCESS)
         return number.text
+
+    @allure.step("Задаем ожидание для изменения текста в секции Заказы в работе")
+    def get_expectation_order_in_process(self):
+        number = self.get_counter_order_in_process()
+        if number == ExpextedText.ORDER_IN_PROCESS:
+            self.get_expectation_for_element(OrderFeedLocators.ORDERS_IN_PROCESS, number)
+            new_number = self.get_text(OrderFeedLocators.ORDERS_IN_PROCESS).strip()
+        return new_number

@@ -16,6 +16,18 @@ class Helpers:
         return body
 
     @staticmethod
+    def mod_create_order_body():
+        body = Body.CREATE_ORDER_BODY.copy()
+        response = BurgersApi.get_ingredients().json()
+        ingredients_list = []
+        for ingredient in response['data']:
+            ingredients_list.append(ingredient['_id'])
+        random_ingredients = random.choices(ingredients_list, k=2)
+        body["ingredients"] = random_ingredients
+
+        return body
+
+    @staticmethod
     def fake_email():
         faker = Faker()
         email = faker.email()

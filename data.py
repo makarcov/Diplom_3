@@ -18,8 +18,17 @@ class Body:
         "name": "Username"
     }
 
+    CREATE_ORDER_BODY = {
+        "ingredients": ["60d3b41abdacab0026a733c6", "609646e4dc916e00276b2870"]
+    }
+
 
 class Endpoint:
 
     CREATE_USER_ENDPOINT = '/api/auth/register'
     DELETE_USER_ENDPOINT = '/api/auth/user'
+    CREATE_ORDER = '/api/orders'
+
+class ExpextedText:
+
+    ORDER_IN_PROCESS = 'Все текущие заказы готовы!'

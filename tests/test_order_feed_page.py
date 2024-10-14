@@ -1,5 +1,6 @@
 import allure
 
+from burgers_api import BurgersApi
 from pages.main_page import MainPage
 from pages.order_feed_page import OrderFeedPage
 
@@ -48,6 +49,6 @@ class TestOrderFeedPage:
         order_number = main_page.create_burger_order()
         order_feed_page = OrderFeedPage(driver)
         order_feed_page.open_order_feed()
-        order_in_process = order_feed_page.get_counter_order_in_process()
+        order_in_process = order_feed_page.get_expectation_order_in_process()
 
-        assert order_number in order_in_process
+        assert int(order_number) == int(order_in_process)
