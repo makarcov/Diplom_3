@@ -13,8 +13,7 @@ from pages.profile_page import ProfilePage
 
 
 @allure.step("Запуск браузера")
-# @pytest.fixture(params=['chrome', 'firefox'])
-@pytest.fixture(params=['chrome'])
+@pytest.fixture(params=['chrome', 'firefox'])
 def driver(request):
     browser = None
     if request.param == 'chrome':

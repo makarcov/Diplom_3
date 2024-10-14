@@ -4,6 +4,7 @@ import allure
 
 from seletools.actions import drag_and_drop
 
+from data import ExpextedText
 from locators.main_page_locators import MainPageLocators
 from pages.base_page import BasePage
 
@@ -52,27 +53,13 @@ class MainPage(BasePage):
         self.add_bun_to_order()
         self.add_sauce_to_order()
         self.add_filling_to_order()
-        self.add_sauce_to_order()
-        self.add_filling_to_order()
-        self.add_sauce_to_order()
-        self.add_filling_to_order()
-        self.add_sauce_to_order()
-        self.add_filling_to_order()
-        self.add_sauce_to_order()
-        self.add_filling_to_order()
-        self.add_sauce_to_order()
-        self.add_filling_to_order()
-        self.add_sauce_to_order()
-        self.add_filling_to_order()
-        self.add_sauce_to_order()
-        self.add_filling_to_order()
-        self.add_sauce_to_order()
-        self.add_filling_to_order()
         self.make_order_click()
-        time.sleep(2)
         number = self.get_order_number_from_popup()
+        if number == ExpextedText.ORDER_NUMBER:
+            self.get_expectation_for_element(MainPageLocators.POPUP_WINDOW_ORDER_NUMBER, number)
+            new_number = self.get_text(MainPageLocators.POPUP_WINDOW_ORDER_NUMBER).strip()
         self.close_popup_order_number()
-        return number
+        return new_number
 
     @allure.step("Получение значение счетчика ингредиента при добавлении в заказ")
     def get_bun_counter(self):

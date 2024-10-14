@@ -36,7 +36,6 @@ class TestOrderFeedPage:
         order_feed_page.open_order_feed()
         counter_today_start = order_feed_page.get_counter_today()
         main_page = MainPage(driver)
-
         main_page.create_burger_order()
         order_feed_page.open_order_feed()
         counter_today_finish = order_feed_page.get_counter_today()

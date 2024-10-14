@@ -31,4 +31,5 @@ class Endpoint:
 
 class ExpextedText:
 
+    ORDER_NUMBER = '9999'
     ORDER_IN_PROCESS = 'Все текущие заказы готовы!'
